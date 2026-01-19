@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Deployment Frameworks Infographic</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        azure: {
+                            light: '#0078D4', // Azure Blue
+                            dark: '#005A9E',
+                            bg: '#f0f6ff',
+                            border: '#cce1ff'
+                        },
+                        connector: {
+                            flow: '#f97316', // Orange
+                            secure: '#10b981', // Green
+                            auto: '#6366f1' // Indigo
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for Connectors */
+        .blueprint-grid {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .node-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .node-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Connecting Lines Logic */
+        .connector-line {
+            position: absolute;
+            background-color: #94a3b8;
+            z-index: 0;
+        }
+
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #94a3b8;
+        }
+
+        .arrow-right::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #94a3b8;
+        }
+
+        /* Specific flow colors */
+        .flow-orange { border-color: #f97316 !important; background-color: #f97316 !important; }
+        .flow-orange::after { border-top-color: #f97316 !important; }
+        
+        .flow-green { border-color: #10b981 !important; background-color: #10b981 !important; }
+        .flow-green::after { border-top-color: #10b981 !important; }
+
+        /* Diamond Shape */
+        .diamond {
+            transform: rotate(45deg);
+        }
+        .diamond-inner {
+            transform: rotate(-45deg);
+        }
+
+        /* Dashed Box Animation */
+        .dashed-boundary {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%233B82F6' stroke-width='2' stroke-dasharray='12%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen p-4 md:p-8">
+
+    <!-- Header -->
+    <header class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-azure-dark mb-2">Frameworks for Deploying Databricks LLM Code</h1>
+        <p class="text-slate-500 font-medium">From Notebook Logic to Azure Web App</p>
+    </header>
+
+    <!-- Main Diagram Container -->
+    <div class="max-w-7xl mx-auto blueprint-grid bg-white rounded-xl shadow-lg border border-slate-200 p-6 md:p-12 relative overflow-hidden">
+
+        <!-- SECTION 1: STARTING POINT -->
+        <div class="relative flex justify-center mb-16">
+            <!-- Dashed Boundary: Databricks Workspace (Top part) -->
+            <div class="dashed-boundary absolute -top-6 -left-4 -right-4 h-[140%] z-0 rounded-2xl opacity-50 pointer-events-none"></div>
+            <div class="absolute top-[-1.5rem] right-0 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-bl-lg font-mono z-10">Azure Databricks Workspace</div>
+
+            <!-- Start Node -->
+            <div class="node-card bg-white border-2 border-blue-500 rounded-lg p-6 w-72 text-center shadow-md z-10 relative">
+                <div class="text-xs font-bold text-blue-600 uppercase mb-2 tracking-wider">Source</div>
+                <div class="text-5xl text-orange-500 mb-3"><i class="fa-solid fa-file-code"></i></div>
+                <h3 class="font-bold text-lg">Python LLM Wrapper</h3>
+                <div class="flex items-center justify-center gap-2 mt-2 text-slate-500 text-sm bg-slate-100 py-1 rounded">
+                    <i class="fa-solid fa-book"></i> Jupyter Notebooks
+                </div>
+                <p class="text-xs text-slate-400 mt-2">Content Ideation Logic</p>
+                
+                <!-- Connector Down -->
+                <div class="absolute left-1/2 -bottom-16 w-1 h-16 bg-slate-300 -ml-0.5"></div>
+                <div class="absolute left-1/2 -bottom-16 text-slate-400 text-2xl"><i class="fa-solid fa-caret-down"></i></div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: DECISION -->
+        <div class="flex justify-center mb-16 relative z-20">
+            <div class="w-48 h-48 bg-azure-dark rotate-45 flex items-center justify-center shadow-xl border-4 border-white rounded-xl transform hover:scale-105 transition-transform cursor-default">
+                <div class="-rotate-45 text-center text-white px-2">
+                    <i class="fa-solid fa-code-branch text-2xl mb-1 opacity-80"></i>
+                    <p class="font-bold text-sm leading-tight">Choose Deployment Framework</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN SPLIT: PATHS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+            
+            <!-- Connection Lines (Desktop Only) -->
+            <div class="hidden md:block absolute top-[-4rem] left-1/2 w-1/2 h-1 border-t-4 border-slate-300 -translate-x-1/2 z-0"></div> <!-- Horizontal bar -->
+            <svg class="hidden md:block absolute top-[-6rem] left-0 w-full h-24 pointer-events-none z-10" overflow="visible">
+                <!-- Left Path Arrow -->
+                <path d="M 50% 100 L 25% 100 L 25% 150" fill="none" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)" />
+                <!-- Right Path Arrow -->
+                <path d="M 50% 100 L 75% 100 L 75% 150" fill="none" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)" />
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+                    </marker>
+                </defs>
+            </svg>
+
+            <!-- PATH 1: INTEGRATED (LEFT) -->
+            <div class="relative p-6 rounded-2xl bg-blue-50/50 border-2 border-dashed border-blue-300 flex flex-col items-center gap-8">
+                <!-- Tag -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-100 text-blue-800 px-4 py-1 rounded-full font-bold text-sm border border-blue-200 shadow-sm z-20 whitespace-nowrap">
+                    Path 1: Integrated (Databricks Apps)
+                </div>
+
+                <!-- Internal Workspace Label -->
+                <div class="absolute top-4 left-4 text-xs font-mono text-blue-400 opacity-70">
+                    <i class="fa-solid fa-cloud"></i> Extended Workspace
+                </div>
+
+                <!-- Step 1 -->
+                <div class="node-card bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-400 w-full max-w-xs flex items-center gap-4 mt-8">
+                    <div class="text-3xl text-yellow-500 pl-2">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-700">Refactor & Config</h4>
+                        <div class="flex gap-2 text-xs text-slate-500 mt-1">
+                            <span class="bg-slate-100 px-1 rounded border">app.py</span>
+                            <span class="bg-slate-100 px-1 rounded border">app.yaml</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <i class="fa-solid fa-arrow-down text-orange-400 text-xl"></i>
+
+                <!-- Step 2 -->
+                <div class="node-card bg-slate-800 text-white p-4 rounded-lg shadow-md w-full max-w-xs flex items-center gap-4 border-l-4 border-orange-400">
+                    <div class="text-2xl text-green-400 pl-2">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Deployment</h4>
+                        <code class="text-xs text-slate-400 block mt-1">databricks apps deploy</code>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <i class="fa-solid fa-arrow-down text-orange-400 text-xl"></i>
+
+                <!-- Step 3 (Destination) -->
+                <div class="node-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600 w-full max-w-xs text-center ring-1 ring-slate-100">
+                    <div class="text-blue-600 font-bold uppercase tracking-wider text-xs mb-3">Hosting Destination</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Databricks Apps</h3>
+                    
+                    <div class="grid grid-cols-4 gap-2 mb-4 justify-items-center opacity-80">
+                        <!-- Logos simulated with icons/text for standalone -->
+                        <div class="flex flex-col items-center"><i class="fa-solid fa-fire text-red-500 text-xl"></i><span class="text-[0.6rem] mt-1">Streamlit</span></div>
+                        <div class="flex flex-col items-center"><i class="fa-solid fa-bolt text-yellow-500 text-xl"></i><span class="text-[0.6rem] mt-1">Gradio</span></div>
+                        <div class="flex flex-col items-center"><i class="fa-solid fa-flask text-slate-600 text-xl"></i><span class="text-[0.6rem] mt-1">Flask</span></div>
+                        <div class="flex flex-col items-center"><i class="fa-solid fa-gauge-high text-teal-500 text-xl"></i><span class="text-[0.6rem] mt-1">FastAPI</span></div>
+                    </div>
+                    
+                    <div class="bg-blue-50 text-blue-700 p-2 rounded text-xs leading-tight">
+                        <strong>Best for:</strong> Internal teams, rapid prototyping, direct data access.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PATH 2: SCALABLE (RIGHT) -->
+            <div class="relative p-6 rounded-2xl bg-indigo-50/30 border border-indigo-200 flex flex-col items-center gap-8">
+                <!-- Tag -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white px-4 py-1 rounded-full font-bold text-sm shadow-md z-20 whitespace-nowrap">
+                    Path 2: Scalable (Azure Container Apps)
+                </div>
+
+                 <!-- External Cloud Label -->
+                 <div class="absolute top-4 right-4 text-xs font-mono text-indigo-400 opacity-70">
+                    <i class="fa-solid fa-globe"></i> General Azure Cloud
+                </div>
+
+                <!-- Step 1 -->
+                <div class="node-card bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-400 w-full max-w-xs flex items-center gap-4 mt-8">
+                    <div class="text-4xl text-blue-400 pl-2">
+                        <i class="fa-brands fa-docker"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-700">Containerization</h4>
+                        <div class="flex gap-2 text-xs text-slate-500 mt-1">
+                            <span class="bg-slate-100 px-1 rounded border">Dockerfile</span>
+                            <span class="text-orange-500 font-bold">Streamlit/FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <i class="fa-solid fa-arrow-down text-orange-400 text-xl"></i>
+
+                <!-- Step 2 -->
+                <div class="node-card bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-400 w-full max-w-xs flex items-center gap-4">
+                    <div class="text-3xl text-blue-600 pl-2">
+                        <i class="fa-solid fa-cubes-stacked"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-700">Registry (ACR)</h4>
+                        <p class="text-xs text-slate-400">Push Image to Registry</p>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <i class="fa-solid fa-arrow-down text-orange-400 text-xl"></i>
+
+                <!-- Step 3 (Destination) -->
+                <div class="node-card bg-white p-6 rounded-xl shadow-xl border-t-4 border-indigo-600 w-full max-w-xs text-center ring-1 ring-slate-100 relative z-10">
+                    <div class="text-indigo-600 font-bold uppercase tracking-wider text-xs mb-3">Enterprise Hosting</div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Azure Container Apps</h3>
+                    <div class="flex justify-center gap-2 mb-4">
+                         <span class="bg-indigo-100 text-indigo-700 text-[0.65rem] px-2 py-1 rounded-full">Serverless</span>
+                         <span class="bg-indigo-100 text-indigo-700 text-[0.65rem] px-2 py-1 rounded-full">Auto-Scale to 0</span>
+                    </div>
+                    
+                    <div class="bg-indigo-50 text-indigo-800 p-2 rounded text-xs leading-tight">
+                        <strong>Best for:</strong> Public-facing, professional, microservices.
+                    </div>
+                </div>
+
+                <!-- Supporting Infrastructure (Bottom Section of Right Col) -->
+                <div class="w-full mt-8 pt-8 border-t border-indigo-100 relative">
+                     <p class="text-center text-xs text-slate-400 uppercase tracking-widest mb-6">Supporting Infrastructure</p>
+                     
+                     <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        
+                        <!-- Security Node -->
+                        <div class="node-card bg-white border border-green-200 p-3 rounded-lg shadow-sm flex items-center gap-3 w-full md:w-auto relative group">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-700">Key Vault</h5>
+                                <p class="text-[0.6rem] text-slate-500">Managed Identity</p>
+                            </div>
+                            
+                            <!-- Visual Line Upwards -->
+                            <div class="hidden md:block absolute -top-12 left-1/2 w-0.5 h-12 bg-green-400"></div>
+                             <div class="hidden md:block absolute -top-12 left-1/2 text-green-500 text-xs -translate-x-1/2 -translate-y-full bg-white px-1"><i class="fa-solid fa-lock"></i></div>
+                        </div>
+
+                        <!-- Automation Node -->
+                        <div class="node-card bg-white border border-purple-200 p-3 rounded-lg shadow-sm flex items-center gap-3 w-full md:w-auto relative group">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+                                <i class="fa-brands fa-github"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sm text-slate-700">GitHub Actions</h5>
+                                <p class="text-[0.6rem] text-slate-500">CI/CD Pipeline</p>
+                            </div>
+
+                             <!-- Visual Line Upwards (Longer to reach Registry) -->
+                             <!-- Note: Using simple CSS for visual indication -->
+                             <svg class="hidden md:block absolute bottom-full right-4 w-12 h-48 pointer-events-none opacity-50 z-0" style="top: -12rem;">
+                                <path d="M 10 200 L 10 10 L -50 10" fill="none" stroke="#9333ea" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowhead-purple)" />
+                                <defs>
+                                    <marker id="arrowhead-purple" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#9333ea" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+
+                     </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Footer / Legend -->
+        <div class="mt-12 border-t pt-4 flex flex-wrap justify-center gap-6 text-xs text-slate-500">
+            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-orange-400 rounded-full"></span> Deployment Flow</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-green-400 rounded-full"></span> Security Link</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-purple-400 rounded-full"></span> CI/CD Automation</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 border border-dashed border-blue-400 bg-blue-50"></span> Databricks Environment</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-indigo-50 border border-indigo-200"></span> Azure Public Cloud</div>
+        </div>
+
+        <p class="mt-6 text-center text-xs text-slate-400">&copy; 2025 nulln∅tes. Concepts represented for educational purposes.</p>
+
+    </div>
+
+</body>
+</html>
